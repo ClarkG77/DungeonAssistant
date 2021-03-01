@@ -9,6 +9,20 @@ class MainWindow(QtWidgets.QMainWindow):
         #Load the UI Page
         uic.loadUi('test1.ui', self)
 
+        central = self.findChild(QtWidgets.QWidget, 'centralwidget')
+
+        self.enterButton = self.findChild(QtWidgets.QPushButton, 'button')
+        self.enterButton.clicked.connect(self.send_message)
+
+        self.input = self.findChild(QtWidgets.QLineEdit, "input")
+        
+        self.output = self.findChild(QtWidgets.QTextBrowser, "output")
+        self.output.append("test")
+
+    def send_message(self):
+        self.output.append(self.input.text())
+        self.input.clear()
+
 
 def main():
     app = QtWidgets.QApplication(sys.argv)

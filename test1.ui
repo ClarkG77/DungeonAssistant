@@ -6,95 +6,55 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>804</width>
-    <height>604</height>
+    <width>827</width>
+    <height>618</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="verticalLayoutWidget">
+   <widget class="QPushButton" name="button">
     <property name="geometry">
      <rect>
-      <x>-1</x>
-      <y>-1</y>
-      <width>801</width>
-      <height>571</height>
+      <x>680</x>
+      <y>580</y>
+      <width>129</width>
+      <height>23</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QScrollArea" name="scrollArea">
-       <property name="widgetResizable">
-        <bool>true</bool>
-       </property>
-       <widget class="QWidget" name="scrollAreaWidgetContents">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>797</width>
-          <height>567</height>
-         </rect>
-        </property>
-        <widget class="QTextBrowser" name="textBrowser">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="geometry">
-          <rect>
-           <x>-5</x>
-           <y>-9</y>
-           <width>811</width>
-           <height>581</height>
-          </rect>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
-       </widget>
-      </widget>
-     </item>
-    </layout>
+    <property name="text">
+     <string>Enter</string>
+    </property>
    </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget">
+   <widget class="QLineEdit" name="input">
     <property name="geometry">
      <rect>
-      <x>-1</x>
-      <y>569</y>
-      <width>671</width>
-      <height>31</height>
+      <x>0</x>
+      <y>580</y>
+      <width>669</width>
+      <height>20</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLineEdit" name="inputText"/>
-     </item>
-    </layout>
    </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget_2">
+   <widget class="QTextBrowser" name="output">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>669</x>
-      <y>569</y>
-      <width>131</width>
-      <height>31</height>
+      <x>0</x>
+      <y>0</y>
+      <width>821</width>
+      <height>569</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QPushButton" name="enterButton">
-       <property name="text">
-        <string>Enter</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
    </widget>
   </widget>
  </widget>
