@@ -21,6 +21,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.enterButton.clicked.connect(self.send_message)
 
         self.input = self.findChild(QtWidgets.QLineEdit, "input")
+        self.input.returnPressed.connect(self.send_message)
         
         self.output = self.findChild(QtWidgets.QTextBrowser, "output")
         self.output.append("test")
