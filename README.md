@@ -7,4 +7,4 @@ Next pip install PyQt5 with the cmd
 pip install PyQt5
 
 ## To edit the UI layout
-download and install the [QT Designer](https://build-system.fman.io/qt-designer-download) 
+Download and install the [QT Designer](https://build-system.fman.io/qt-designer-download) 
