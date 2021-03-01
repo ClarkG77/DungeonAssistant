@@ -24,7 +24,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.input.returnPressed.connect(self.send_message)
         
         self.output = self.findChild(QtWidgets.QTextBrowser, "output")
-        self.output.append("test")
+        self.output.append("Hi, how can I help you?")
 
     def send_message(self):
         new_input = self.input.text()
