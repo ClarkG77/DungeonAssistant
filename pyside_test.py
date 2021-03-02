@@ -1,4 +1,5 @@
 from PyQt5 import QtWidgets, uic
+import parseResponse
 from ibm_watson import AssistantV2
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 import sys
@@ -25,19 +26,19 @@ class MainWindow(QtWidgets.QMainWindow):
         
         self.output = self.findChild(QtWidgets.QTextBrowser, "output")
         self.output.append("Hi, how can I help you?")
-
+    def start_assistant(self):
+        self.assistant = create_assistant()
+        self.sesh_id = create_session(self.assistant)
     def send_message(self):
         new_input = self.input.text()
         self.output.append(new_input)
 
         response = get_response_text(self.assistant, asst_id, self.sesh_id, new_input)
-        
-        self.output.append(str(response))
+        response = parseResponse.parseResponse(response)
+        #parse response here then append it
+        self.output.append(response)
         self.input.clear()
 
-    def start_assistant(self):
-       self.assistant = create_assistant()
-       self.sesh_id = create_session(self.assistant)
 
 
 def create_assistant():

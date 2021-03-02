@@ -71,7 +71,7 @@
      <set>Qt::TextBrowserInteraction</set>
     </property>
     <property name="openExternalLinks">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="openLinks">
      <bool>true</bool>
