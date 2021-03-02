@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets, uic
 import parseResponse
+from watsonAssistant import Assistant
 from ibm_watson import AssistantV2
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 import sys
@@ -13,10 +14,10 @@ class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
 
+        self.assistant = Assistant()
+
         #Load the UI Page
         uic.loadUi('test1.ui', self)
-
-        central = self.findChild(QtWidgets.QWidget, 'centralwidget')
 
         self.enterButton = self.findChild(QtWidgets.QPushButton, 'button')
         self.enterButton.clicked.connect(self.send_message)
@@ -25,55 +26,23 @@ class MainWindow(QtWidgets.QMainWindow):
         self.input.returnPressed.connect(self.send_message)
         
         self.output = self.findChild(QtWidgets.QTextBrowser, "output")
-        self.output.append("Hi, how can I help you?")
-    def start_assistant(self):
-        self.assistant = create_assistant()
-        self.sesh_id = create_session(self.assistant)
+        
+
     def send_message(self):
         new_input = self.input.text()
         self.output.append(new_input)
 
-        response = get_response_text(self.assistant, asst_id, self.sesh_id, new_input)
+        #response = get_response_text(self.assistant, asst_id, self.sesh_id, new_input)
+        response = self.assistant.getResponse(new_input)
         response = parseResponse.parseResponse(response)
         #parse response here then append it
         self.output.append(response)
         self.input.clear()
 
 
-
-def create_assistant():
-    authenticator = IAMAuthenticator(auth_key)
-    assistant = AssistantV2(
-        version='2021-02-16',
-        authenticator=authenticator
-    )
-    assistant.set_service_url(serv_url)
-
-    return assistant
-
-def create_session(assistant):
-    sesh_id = assistant.create_session(
-        assistant_id=asst_id
-    ).get_result()['session_id']
-
-    return sesh_id
-
-def get_response_text(assistant, asst_id, sesh_id, message):
-    response = assistant.message(
-        assistant_id=asst_id,
-        session_id=sesh_id,
-        input={
-            'message_type': 'text',
-            'text': message,
-        }
-    ).get_result()
-
-    return response['output']['generic']
-
 def main():
     app = QtWidgets.QApplication(sys.argv)
     main = MainWindow()
-    main.start_assistant()
     main.show()
     sys.exit(app.exec_())
 
