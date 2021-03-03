@@ -22,9 +22,9 @@ class MainWindow(QtWidgets.QMainWindow):
         
         self.outputScroll = self.findChild(QtWidgets.QScrollArea, "scrollArea")
         self.outputWidget = self.findChild(QtWidgets.QWidget, "scrollAreaWidgetContents")
-        self.outputArea = self.findChild(QtWidgets.QVBoxLayout, "layoutArea")
+        self.outputLayout = self.findChild(QtWidgets.QVBoxLayout, "layoutArea")
 
-        self.outputWidget.setLayout(self.outputArea)
+        self.outputWidget.setLayout(self.outputLayout)
         self.outputScroll.setWidget(self.outputWidget)
 
         
@@ -48,7 +48,7 @@ class MainWindow(QtWidgets.QMainWindow):
         newLabel.setSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         newLabel.setOpenExternalLinks(True)
 
-        self.outputArea.addWidget(newLabel)
+        self.outputLayout.addWidget(newLabel)
         newLabel.show()
 
         self.mainApp.processEvents()
