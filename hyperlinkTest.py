@@ -12,10 +12,10 @@ class AppDemo(QWidget):
     def __init__(self):
         super().__init__()
 
-        linkTemplate = '<a target="_blank" href={0}>{1}</a>.<br/><br/>'
-
+        linkTemplate = '<a target="_blank" href={0}>{1}</a>'
         label1 = HyperlinkLabel(self)
-        label1.setText(linkTemplate.format('https://open5e.com/monsters/ancient-black-dragon', 'Open5e.com'))
+        label1.setText(linkTemplate.format(' https://open5e.com/monsters/ancient-black-dragon', 'Open5e.com'))
+
 
         label2 = HyperlinkLabel(self)
         label2.setText(linkTemplate.format('https://Github.com', 'Click Me'))

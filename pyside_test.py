@@ -24,16 +24,20 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.input = self.findChild(QtWidgets.QLineEdit, "input")
         self.input.returnPressed.connect(self.send_message)
-        
         self.output = self.findChild(QtWidgets.QTextBrowser, "output")
-        
+        self.output.append("Hi, how can I help you?")
+    def start_assistant(self):
+        self.assistant = create_assistant()
+        self.sesh_id = create_session(self.assistant)
+    #need to work on killing invalid syntax to protect our app and watson
 
     def send_message(self):
         new_input = self.input.text()
-        self.output.append(new_input)
-
+        self.output.append(new_input.rjust(100))
         #response = get_response_text(self.assistant, asst_id, self.sesh_id, new_input)
         response = self.assistant.getResponse(new_input)
+        response = get_response_text(self.assistant, asst_id, self.sesh_id, new_input)
+        print(str(response))
         response = parseResponse.parseResponse(response)
         #parse response here then append it
         self.output.append(response)
