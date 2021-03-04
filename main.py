@@ -35,13 +35,26 @@ class MainWindow(QtWidgets.QMainWindow):
         self.input.clear()
 
         response = self.assistant.getResponse(new_input)
-        
+        print(str(response))
         #parse response here then append it
         response = parseResponse.parseResponse(response)
         self.print(response)
         
-
-    def print(self, message):
+    def print_response(self,response):
+        for label in res:
+            #just print text
+            if label['response_type']=='text':
+                print_text(label['text'])
+            #description -> source
+            elif label['response_type']=='image':
+                print_text(label['description'])
+                print_image(label['source'])
+            #title -> description -> buttons ie options
+            elif label['response_type']=='option':
+                print_text(label['title'])
+                print_text(label['description'])
+                print_button(['options'])
+    def print_text(self, message):
         newLabel = QtWidgets.QLabel(self.outputWidget)
         newLabel.setText(message)
         newLabel.setWordWrap(True)
@@ -53,6 +66,12 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.mainApp.processEvents()
         self.outputScroll.ensureWidgetVisible(newLabel)
+    def print_image(self,source):
+        
+        pass
+    def print_button(self,options):
+        
+        pass
         
 
 def main():
