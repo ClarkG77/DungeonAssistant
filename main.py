@@ -38,7 +38,7 @@ class MainWindow(QtWidgets.QMainWindow):
         print(str(response))
         #parse response here then append it
         response = parseResponse.parseResponse(response)
-        self.print(response)
+        self.print_text(response)
         
     def print_response(self,response):
         for label in res:
