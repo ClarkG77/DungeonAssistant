@@ -9,7 +9,8 @@ def parseResponse(res):
             response+=label['text']
             print(label['text'])
         elif label['response_type']=='image':
-            response+='<a href='+label['source']+'></a>'+label['description']
+            #this is supposed to work with rich text
+            response+='<img alt= \"img\"style=\'width: 300px; height: 300px;\'src='+label['source']+'></img>'+label['description']
         elif label['response_type']=='option':
             response+=label['title']
             #spaced for possible button creation between
