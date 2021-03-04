@@ -31,7 +31,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def send_message(self):
         new_input = self.input.text()
-        self.print(new_input)
+        self.print_text(new_input)
         self.input.clear()
 
         response = self.assistant.getResponse(new_input)
