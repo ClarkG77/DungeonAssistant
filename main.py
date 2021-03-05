@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets, uic
 import parseResponse
 from watsonAssistant import Assistant
+from buttonBar import ButtonBar
 import sys
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -26,7 +27,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.outputWidget.setLayout(self.outputLayout)
         self.outputScroll.setWidget(self.outputWidget)
-
         
 
     def send_message(self):
@@ -40,6 +40,7 @@ class MainWindow(QtWidgets.QMainWindow):
         response = parseResponse.parseResponse(response)
         self.print_text(response)
         
+
     def print_response(self,response):
         for label in res:
             #just print text
@@ -54,6 +55,17 @@ class MainWindow(QtWidgets.QMainWindow):
                 print_text(label['title'])
                 print_text(label['description'])
                 print_button(['options'])
+
+
+    def print_buttons(self, labels, values):
+        buttonBar = ButtonBar(self, labels, values, self.outputWidget)
+        self.outputLayout.addWidget(buttonBar.groupBox)
+        buttonBar.show()
+
+        self.mainApp.processEvents()
+        self.outputScroll.ensureWidgetVisible(buttonBar.groupBox)
+
+
     def print_text(self, message):
         newLabel = QtWidgets.QLabel(self.outputWidget)
         newLabel.setText(message)
@@ -66,9 +78,13 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.mainApp.processEvents()
         self.outputScroll.ensureWidgetVisible(newLabel)
+
+
     def print_image(self,source):
         
         pass
+
+
     def print_button(self,options):
         
         pass
