@@ -1,4 +1,6 @@
 from PyQt5 import QtWidgets, uic
+from PyQt5.QtGui import QImage, QPixmap
+import requests
 import parseResponse
 from watsonAssistant import Assistant
 from buttonBar import ButtonBar
@@ -33,29 +35,36 @@ class MainWindow(QtWidgets.QMainWindow):
         new_input = self.input.text()
         self.print_text(new_input)
         self.input.clear()
-
         response = self.assistant.getResponse(new_input)
-        print(str(response))
+        print(str(response))        
         #parse response here then append it
-        response = parseResponse.parseResponse(response)
-        self.print_text(response)
+        self.print_response(response)
+        #response = parseResponse.parseResponse(response)
+        #self.print_response(response)
         
 
     def print_response(self,response):
-        for label in res:
+        for label in response:
             #just print text
             if label['response_type']=='text':
-                print_text(label['text'])
+                self.print_text(label['text'])
             #description -> source
             elif label['response_type']=='image':
-                print_text(label['description'])
-                print_image(label['source'])
+                #check if image or gif
+                if False:
+                    pass
+                else:
+                    self.print_image(label['source'])
+                self.print_text(label['description'])
+                
+                
             #title -> description -> buttons ie options
             elif label['response_type']=='option':
-                print_text(label['title'])
-                print_text(label['description'])
-                print_button(['options'])
+                self.print_text(label['title'])
+                self.print_text(label['description'])
+                self.print_option(['options'])
 
+    #the last lines of each of these should be converted to a new function to generally display things
 
     def print_buttons(self, labels, values):
         buttonBar = ButtonBar(self, labels, values, self.outputWidget)
@@ -79,14 +88,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.mainApp.processEvents()
         self.outputScroll.ensureWidgetVisible(newLabel)
 
-
+    #QMovie is what will play gifs we will likely need a way to auto pause these as they will probably continue playing
     def print_image(self,source):
-        
-        pass
+        image = QImage()
+        image.loadFromData(requests.get(source).content)
+        image_label = QtWidgets.QLabel()
+        image_label.setPixmap(QPixmap(image))
+        self.outputLayout.addWidget(image_label)
+        image_label.show()
 
-
-    def print_button(self,options):
-        
+    def print_option(self,option):
+        #parse through options and send to print_buttons
         pass
         
 
