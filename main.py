@@ -60,9 +60,11 @@ class MainWindow(QtWidgets.QMainWindow):
                 
             #title -> description -> buttons ie options
             elif label['response_type']=='option':
-                self.print_text(label['title'])
-                self.print_text(label['description'])
-                self.print_option(['options'])
+                if 'title' in label:
+                    self.print_text(label['title'])
+                if 'description' in label:
+                    self.print_text(label['description'])
+                self.print_option(label)
 
     #the last lines of each of these should be converted to a new function to generally display things
 
@@ -96,10 +98,16 @@ class MainWindow(QtWidgets.QMainWindow):
         image_label.setPixmap(QPixmap(image))
         self.outputLayout.addWidget(image_label)
         image_label.show()
-
-    def print_option(self,option):
-        #parse through options and send to print_buttons
-        pass
+    #currently defined for monster search only
+    def print_option(self,label):
+        text=[]
+        values=[]
+        for option in label['options']:
+            text.append(option['label'])
+            values.append(option['value']['input']['text'])
+        print(text)
+        print(values)
+        self.print_buttons(text,values)
         
 
 def main():
