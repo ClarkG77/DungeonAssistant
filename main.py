@@ -67,7 +67,6 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.print_option(label)
 
     #the last lines of each of these should be converted to a new function to generally display things
-
     def print_buttons(self, labels, values):
         buttonBar = ButtonBar(self, labels, values, self.outputWidget)
         self.outputLayout.addWidget(buttonBar.groupBox)
