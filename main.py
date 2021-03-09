@@ -93,6 +93,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.outputScroll.ensureWidgetVisible(newLabel)
 
     #QMovie is what will play gifs we will likely need a way to auto pause these as they will probably continue playing
+    #Need to rescale 
+    #Need to move gif to GUI and off of Watson
     def print_image(self,source):
         image = QImage()
         image.loadFromData(requests.get(source).content)
