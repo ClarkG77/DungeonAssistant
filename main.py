@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets, uic
+from PyQt5 import QtWidgets, uic, QtCore
 from PyQt5.QtGui import QImage, QPixmap
 import requests
 import parseResponse
@@ -33,7 +33,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def send_message(self):
         new_input = self.input.text()
-        self.print_text(new_input)
+        self.print_text(new_input, alignRight=True)
         self.input.clear()
         response = self.assistant.getResponse(new_input)
         print(str(response))        
@@ -77,12 +77,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.outputScroll.ensureWidgetVisible(buttonBar.groupBox)
 
 
-    def print_text(self, message):
+    def print_text(self, message, alignRight=False):
         newLabel = QtWidgets.QLabel(self.outputWidget)
         newLabel.setText(message)
         newLabel.setWordWrap(True)
         newLabel.setSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         newLabel.setOpenExternalLinks(True)
+
+        if(alignRight):
+            newLabel.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
 
         self.outputLayout.addWidget(newLabel)
         newLabel.show()
